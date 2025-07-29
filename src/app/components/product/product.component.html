@@ -1,0 +1,47 @@
+<h2>Product Management</h2>
+
+<form (ngSubmit)="submitForm()" #formRef="ngForm">
+  <div>
+    <label>Name:</label>
+    <input type="text" [(ngModel)]="productForm.name" name="name" required />
+  </div>
+
+  <div>
+    <label>Price:</label>
+    <input type="number" [(ngModel)]="productForm.price" name="price" required />
+  </div>
+
+  <div>
+    <label>Description:</label>
+    <input type="text" [(ngModel)]="productForm.description" name="description" />
+  </div>
+
+  <button type="submit">{{ isEditMode ? 'Update' : 'Add' }} Product</button>
+  <button type="button" (click)="resetForm()" *ngIf="isEditMode">Cancel</button>
+</form>
+
+<hr />
+
+<h3>Product List</h3>
+
+<table border="1" cellspacing="0" cellpadding="5">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{ product.name }}</td>
+      <td>{{ product.price }}</td>
+      <td>{{ product.description }}</td>
+      <td>
+        <button (click)="editProduct(product)">Edit</button>
+        <button (click)="deleteProduct(product._id!)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
